@@ -3,14 +3,17 @@ package question1;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.*;
+import java.applet.*;
 
 public class IHMPile extends JFrame implements ActionListener{
     private JTextField donnee = new JTextField(6);
     private JTextField sommet = new JTextField(6);
     private JLabel     contenu = new JLabel("[]");
-
     private Pile p;
-
+    private PolygoneRegulier polyReg;
+    private int nCote, longCote; 
+    
     public IHMPile(){
         super("IHM Pile");
         JButton    boutonEmpiler = new JButton("empiler");
@@ -36,17 +39,34 @@ public class IHMPile extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent ae){
         if(ae.getActionCommand().equals("empiler")){
-
-            // à compléter
-
-            // en cas d'exception
-            //contenu.setText( /* à compléter */"" + " estPleine !");
+            try
+            {
+                nCote = Integer.parseInt(donnee.getText());
+                longCote = Integer.parseInt(sommet.getText());
+                polyReg = new PolygoneRegulier(nCote, longCote);
+                p.empiler(polyReg);
+                contenu.setText(p.toString());
+            }
+            catch(NumberFormatException e){
+                contenu.setText("erreur: "+ e.getMessage());
+            }
+            catch (question1.PilePleineException ppe)
+            {
+                contenu.setText("la pile est Pleine !");
+            }
 
         }else{
 
-            // à compléter
-            // en cas d'exception
-            //contenu.setText( /* à compléter */"" + " estVide !");
+            try
+            {
+                p.depiler();
+                contenu.setText(p.toString());
+            }
+            catch (question1.PileVideException pve)
+            {
+                contenu.setText("la pile est Vide !");
+            }
+            
         }
     }
 

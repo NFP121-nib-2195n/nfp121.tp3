@@ -40,7 +40,13 @@ public class PilesAuMemeComportement extends junit.framework.TestCase {
         assertEquals(p1.capacite(), p2.capacite());
         assertEquals(p2.capacite(), p3.capacite());
         assertEquals(p3.capacite(), p4.capacite());
+        
 
+        assertEquals(p1.taille(), p2.taille());
+        assertEquals(p2.taille(), p3.taille());
+        assertEquals(p3.taille(), p4.taille());
+
+        
         assertEquals("[a, b]", p1.toString());
         assertEquals(p1.toString(), p2.toString());
         assertEquals(p2.toString(), p3.toString());
